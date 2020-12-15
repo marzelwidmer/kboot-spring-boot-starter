@@ -1,4 +1,4 @@
-rootProject.name = "kboot-spring-boot-starter"
+rootProject.name = "kboot-spring-boot-starter-root"
 
 include(
     "kboot-spring-boot-starter-autoconfigure",
