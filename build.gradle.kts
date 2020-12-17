@@ -9,7 +9,6 @@ plugins {
     kotlin("plugin.spring") version "1.4.21" apply false
     `java-library`
     `maven-publish`
-    maven
 }
 
 fun Project.envConfig() = object : kotlin.properties.ReadOnlyProperty<Any?, String?> {
@@ -29,9 +28,17 @@ tasks.register("releaseBuild") {
     dependsOn(subprojects.map { it.tasks.findByName("build") })
 }
 
+
+
 subprojects {
     apply(plugin = "java")
+    apply(plugin = "maven")
     apply(plugin = "maven-publish")
+//    apply(plugin = "kotlin")
+//    apply(plugin = "java-library")
+//    apply(plugin = "org.jetbrains.kotlin.jvm")
+//    apply(plugin = "org.jetbrains.kotlin.plugin.spring")
+//    apply(plugin = "io.spring.dependency-management")
 
     group = "ch.keepcalm"
 
@@ -39,7 +46,9 @@ subprojects {
         mavenLocal()
         mavenCentral()
         jcenter()
+        maven { url = uri("https://repo.spring.io/milestone") }
     }
+
 
     java {
         sourceCompatibility = JavaVersion.VERSION_11
@@ -72,55 +81,6 @@ subprojects {
         }
         if (JavaVersion.current().isJava9Compatible) {
             (options as StandardJavadocDocletOptions).addBooleanOption("html5", true)
-        }
-    }
-
-    val repositoryUser by envConfig()
-    val repositoryPassword by envConfig()
-    publishing {
-        repositories {
-            maven {
-                name = "MavenCentral"
-                val releasesRepoUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2"
-                val snapshotsRepoUrl = "https://oss.sonatype.org/content/repositories/snapshots"
-                url = uri(if (version.toString().endsWith("SNAPSHOT")) snapshotsRepoUrl else releasesRepoUrl)
-                credentials {
-                    username = repositoryUser
-                    password = repositoryPassword
-                }
-            }
-        }
-        publications {
-            create<MavenPublication>("mavenJava") {
-                from(components["java"])
-                artifact(tasks["sourcesJar"])
-                artifact(tasks["javadocJar"])
-
-                pom {
-                    name.set("Sample Spring Boot Starter")
-                    description.set("A Spring Boot Starter example.")
-                    url.set("https://<Website or Repository URL>")
-
-                    licenses {
-                        license {
-                            name.set("The Apache License, Version 2.0")
-                            url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
-                        }
-                    }
-                    developers {
-                        developer {
-                            id.set("<Developer Id>")
-                            name.set("<Developer Name>")
-                            email.set("<Developer Email>")
-                        }
-                    }
-                    scm {
-                        connection.set("https://<Repository URL>.git")
-                        developerConnection.set("https://<Repository URL>.git")
-                        url.set("https://<Website URL>")
-                    }
-                }
-            }
         }
     }
 }

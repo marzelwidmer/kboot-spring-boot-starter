@@ -15,7 +15,7 @@ class FakeTokenController() {
     fun faketoken() = generateToken(Token())
 }
 
-fun main(args: Array<String>) {
+fun main() {
     println("Welcome to JWT token generator....")
     println("subject : [john.doe@foo.bar.ch]")
     val subject = readLine()?.ifBlank { Token().subject }
