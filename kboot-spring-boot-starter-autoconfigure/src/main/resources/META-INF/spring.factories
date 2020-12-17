@@ -1,5 +1,6 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   hello.HelloServiceAutoConfiguration,\
   foo.FooServiceAutoConfiguration,\
- bar.BarServiceAutoConfiguration
+ bar.BarServiceAutoConfiguration,\
+ ch.keepcalm.security.faketoken.FakeTokenControllerAutoConfiguration
 
