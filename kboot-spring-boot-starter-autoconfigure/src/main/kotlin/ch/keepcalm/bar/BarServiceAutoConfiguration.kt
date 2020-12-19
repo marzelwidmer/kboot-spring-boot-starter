@@ -1,4 +1,4 @@
-package hello
+package ch.keepcalm.bar
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
@@ -6,11 +6,11 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
 @Configuration
-@ConditionalOnClass(HelloService::class)
-class HelloServiceAutoConfiguration {
+@ConditionalOnClass(BarService::class)
+class BarServiceAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean
-    fun helloService(): HelloService {
-        return ConsoleHelloService()
+    fun barService(): BarService {
+        return BarServiceImpl()
     }
 }

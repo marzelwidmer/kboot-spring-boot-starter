@@ -17,7 +17,7 @@ class FakeTokenController() {
 
 fun main() {
     println("Welcome to JWT token generator....")
-    println("subject : [john.doe@foo.bar.ch]")
+    println("subject : [john.doe@ch.keepcalm.foo.ch.keepcalm.bar.ch]")
     val subject = readLine()?.ifBlank { Token().subject }
     println("vorname : [John]")
     val firstName = readLine()?.ifBlank { Token().firstName }
@@ -31,7 +31,7 @@ fun main() {
     val audience = readLine()?.ifBlank { Token().audience }
     println("secret : [willbereplacedinalaterversiononceRSAcanbeused]")
     val secret = readLine()?.ifBlank { Token().secret }.toString()
-    println("userEmail : [joh.doe@foo.bar.ch]")
+    println("userEmail : [joh.doe@ch.keepcalm.foo.ch.keepcalm.bar.ch]")
     val userEmail = readLine()?.ifBlank { Token().userEmail }
     println("language : [de]")
     val language = readLine()?.ifBlank { Token().language }
@@ -96,12 +96,12 @@ data class Token(
     var language: String? = "de",
     var firstName: String? = "John",
     var name: String? = "Doe",
-    var subject: String? = "john.doe@foo.bar.ch",
+    var subject: String? = "john.doe@ch.keepcalm.foo.ch.keepcalm.bar.ch",
     var roles: String? = "keepcalm.user",
     var issuer: String? = "Keepcalm Auth",
     var audience: String? = "Keepcalm",
     var secret: String = "willbereplacedinalaterversiononceRSAcanbeused",
-    var userEmail: String? = "joh.doe@foo.bar.ch",
+    var userEmail: String? = "joh.doe@ch.keepcalm.foo.ch.keepcalm.bar.ch",
     var expiration: Int = 3600000
 )
 

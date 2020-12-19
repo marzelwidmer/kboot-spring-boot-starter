@@ -1,4 +1,4 @@
-package foo
+package ch.keepcalm.foo
 
 class FooServiceImpl : FooService{
      override fun sayFoo() {

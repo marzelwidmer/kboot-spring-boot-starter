@@ -1,4 +1,4 @@
-package bar
+package ch.keepcalm.bar
 
 class BarServiceImpl : BarService{
      override fun sayBye() {

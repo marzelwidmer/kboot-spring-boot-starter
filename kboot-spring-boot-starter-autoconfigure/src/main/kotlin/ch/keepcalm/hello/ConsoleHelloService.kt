@@ -1,4 +1,4 @@
-package hello
+package ch.keepcalm.hello
 
 class ConsoleHelloService : HelloService {
     override fun sayHello() {
