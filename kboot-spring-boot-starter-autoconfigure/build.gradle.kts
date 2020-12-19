@@ -8,8 +8,7 @@ val springCloudVersion: String by extra
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
     implementation(kotlin("reflect"))
-    implementation("com.fasterxml.jackson.module", "jackson-module-kotlin")
-
+    implementation("com.fasterxml.jackson.module", "jackson-module-kotlin", "2.12.0'")
 
     implementation("org.springframework.boot:spring-boot-starter:$springBootVersion")
     implementation("org.springframework.boot:spring-boot-starter-validation:$springBootVersion")
