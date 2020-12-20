@@ -24,6 +24,7 @@ fun Project.envConfig() = object : kotlin.properties.ReadOnlyProperty<Any?, Stri
 
 buildscript {
     repositories {
+        mavenCentral()
         jcenter()
     }
     dependencies {
@@ -44,56 +45,57 @@ allprojects {
 group = "ch.keepcalm"
 version = "1.0.0"
 
-val artifactName = project.name
-val artifactGroup = project.group.toString()
-val artifactVersion = project.version.toString()
-
-val pomUrl = "https://github.com/marzelwidmer/kboot-spring-boot-starter"
-val pomScmUrl = "https://github.com/marzelwidmer/kboot-spring-boot-starter"
-val pomIssueUrl = "https://github.com/marzelwidmer/kboot-spring-boot-starter/issues"
-val pomDesc = "https://github.com/marzelwidmer/kboot-spring-boot-starter"
-
-val githubRepo = "marzelwidmer/kboot-spring-boot-starter"
-val githubReadme = "README.md"
-
-val pomLicenseName = "MIT"
-val pomLicenseUrl = "https://opensource.org/licenses/mit-license.php"
-val pomLicenseDist = "repo"
-val pomDeveloperId = "marzelwidmer"
-val pomDeveloperName = "Marcel Widmer"
-
-bintray {
-    user = if (project.hasProperty("bintrayUser")) project.property("bintrayUser") as String? else System.getenv("BINTRAY_USER")
-    key = if (project.hasProperty("bintrayApiKey")) project.property("bintrayApiKey") as String? else System.getenv("BINTRAY_API_KEY")
-    publish = true
-    setPublications(project.name)
-
-    pkg.apply {
-        userOrg = "https://dl.bintray.com"
-        repo = "marzelwidmer"
-        name = artifactName
-
-        githubRepo = githubRepo
-
-        vcsUrl = pomScmUrl
-        description = "Spring Boot Starter Project written in kotlin"
-
-        setLabels("kotlin", "spring", "springboot")
-        setLicenses("MIT")
-
-        desc = description
-        websiteUrl = pomUrl
-        issueTrackerUrl = pomIssueUrl
-        githubReleaseNotesFile = githubReadme
-
-        version.apply {
-            name = artifactVersion
-            desc = pomDesc
-            released = org.apache.tools.ant.types.resources.selectors.Date().toString()
-            vcsTag = artifactVersion
-        }
-    }
-}
+//val artifactName = project.name
+//val artifactGroup = project.group.toString()
+//val artifactVersion = project.version.toString()
+//
+//val pomUrl = "https://github.com/marzelwidmer/kboot-spring-boot-starter"
+//val pomScmUrl = "https://github.com/marzelwidmer/kboot-spring-boot-starter"
+//val pomIssueUrl = "https://github.com/marzelwidmer/kboot-spring-boot-starter/issues"
+//val pomDesc = "https://github.com/marzelwidmer/kboot-spring-boot-starter"
+//
+//val githubRepo = "marzelwidmer/kboot-spring-boot-starter"
+//val githubReadme = "README.md"
+//
+//val pomLicenseName = "MIT"
+//val pomLicenseUrl = "https://opensource.org/licenses/mit-license.php"
+//val pomLicenseDist = "repo"
+//val pomDeveloperId = "marzelwidmer"
+//val pomDeveloperName = "Marcel Widmer"
+//
+//bintray {
+//    user = if (project.hasProperty("bintrayUser")) project.property("bintrayUser") as String? else System.getenv("BINTRAY_USER")
+//    key = if (project.hasProperty("bintrayApiKey")) project.property("bintrayApiKey") as String? else System.getenv("BINTRAY_API_KEY")
+//    publish = true
+//    setPublications(project.name)
+//
+//    pkg.apply {
+//        userOrg = "marzelwidmer"
+//        repo = "myrepository"
+//        name = artifactName
+//
+//
+//        githubRepo = githubRepo
+//
+//        vcsUrl = pomScmUrl
+//        description = "Spring Boot Starter Project written in kotlin"
+//
+//        setLabels("kotlin", "spring", "springboot")
+//        setLicenses("MIT")
+//
+//        desc = description
+//        websiteUrl = pomUrl
+//        issueTrackerUrl = pomIssueUrl
+//        githubReleaseNotesFile = githubReadme
+//
+//        version.apply {
+//            name = artifactVersion
+//            desc = pomDesc
+//            released = org.apache.tools.ant.types.resources.selectors.Date().toString()
+//            vcsTag = artifactVersion
+//        }
+//    }
+//}
 
 subprojects {
     println("Enabling Java plugin in project ${project.name}...")
@@ -143,12 +145,62 @@ subprojects {
             (options as StandardJavadocDocletOptions).addBooleanOption("html5", true)
         }
     }
+//    publishing {
+//        publications {
+//            create<MavenPublication>("kboot-spring-boot-starter") {
+//                from(components["java"])
+//                artifact(tasks["sourcesJar"])
+//                artifact(tasks["javadocJar"])
+//
+//                pom {
+//                    name.set("Spring Boot Starter")
+//                    description.set("A Spring Boot Starter.")
+//                    url.set("https://github.com/marzelwidmer?tab=repositories")
+//
+//                    licenses {
+//                        license {
+//                            name.set("The Apache License, Version 2.0")
+//                            url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+//                        }
+//                    }
+//                    developers {
+//                        developer {
+//                            id.set("marzelwidmer")
+//                            name.set("Marcel Widmer")
+//                            email.set("marzelwidmer@gmail.com")
+//                        }
+//                    }
+//                    scm {
+//                        connection.set("scm:git:git://github.com:marzelwidmer/${project.name}.git")
+//                        developerConnection.set("https://github.com/marzelwidmer/${project.name}.git")
+//                        url.set("http://blog.marcelwidmer.org")
+//                    }
+//                }
+//            }
+//        }
+//    }
+}
+
+bintray {
+    user = if (project.hasProperty("bintrayUser")) project.property("bintrayUser") as String? else System.getenv("BINTRAY_USER")
+    key = if (project.hasProperty("bintrayApiKey")) project.property("bintrayApiKey") as String? else System.getenv("BINTRAY_API_KEY")
+    publish = true
+    setPublications(project.name)
+
+    pkg.apply {
+        //   https://dl.bintray.com/marzelwidmer/myrepository
+        repo = "myrepository" //'<repository name on bintray>'
+        name = "${project.name}" //'<artifactId>'
+        version.apply {
+            name = "${project.version}"
+            released = org.apache.tools.ant.types.resources.selectors.Date().toString()
+            vcsTag = "v${project.version}"
+        }
+    }
     publishing {
         publications {
-            create<MavenPublication>("kotlin-faker") {
+            create<MavenPublication>("${project.name}") {
                 from(components["java"])
-                artifact(tasks["sourcesJar"])
-                artifact(tasks["javadocJar"])
 
                 pom {
                     name.set("Spring Boot Starter")
@@ -187,3 +239,71 @@ tasks.named("afterReleaseBuild") {
         )
     )
 }
+
+//
+//bintray {
+//    user = '<bintray user name>'
+//    key = '<bintray API key>'
+//    publications = ['mavenJava']
+//
+//    pkg {
+//        repo = '<repository name on bintray>'
+//        name = '<artifactId>'
+//
+//        version {
+//            name = project.version
+//            released = new Date()
+//            vcsTag = "v${project.version}"
+//        }
+//    }
+//}
+//
+//task sourcesJar(type: Jar, dependsOn: project.classes) {
+//    from sourceSets.main.allSource
+//}
+//
+//task javadocJar(type: Jar, dependsOn: project.javadoc) {
+//    from javadoc.destinationDir
+//}
+//
+//artifacts {
+//    archives sourcesJar, javadocJar
+//}
+//
+//publishing {
+//    publications {
+//        mavenJava(MavenPublication) {
+//            artifactId project.bintray.pkg.name
+//                    from components.java
+//
+//                    artifact sourcesJar {
+//                classifier = 'sources'
+//            }
+//            artifact javadocJar {
+//                classifier = 'javadoc'
+//            }
+//        }
+//    }
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
